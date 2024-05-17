@@ -21,13 +21,12 @@ function App() {
 
   return (
     <div>
-      {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
       {data.map((item: Products) => (
-        <div key={item.id}>{item.title}</div>
+        <p key={item.id}>{item.title}</p>
       ))}
-
+      {isLoading && <p>Loading...</p>}
       <button onClick={fetchMore}>Load more</button>
     </div>
   );
