@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 type Params = {
@@ -10,13 +11,11 @@ export const useFetchMore = ({ apiUrl, limit = 5 }: Params) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [limitState, setLimitState] = useState(limit);
-
   useEffect(() => {
     setIsLoading(true);
-    fetch(`${apiUrl}?limit=${limitState}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
+    axios(`${apiUrl}?limit=${limitState}`)
+      .then((res) => {
+        setData(res.data);
         setIsLoading(false);
       })
       .catch((err) => {

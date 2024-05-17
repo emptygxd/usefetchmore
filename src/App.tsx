@@ -21,6 +21,7 @@ function App() {
 
   return (
     <div>
+      <h1>useFetchMore</h1>
       {error && <p>{error}</p>}
 
       {data.map((item: Products) => (
