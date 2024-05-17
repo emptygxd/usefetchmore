@@ -19,14 +19,11 @@ function App() {
     limit: 4,
   });
 
-  if (error) {
-    return console.log(error);
-  }
-
   return (
     <div>
       {isLoading && <p>Loading...</p>}
-      
+      {error && <p>{error}</p>}
+
       {data.map((item: Products) => (
         <div key={item.id}>{item.title}</div>
       ))}
