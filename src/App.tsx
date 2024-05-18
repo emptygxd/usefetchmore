@@ -1,4 +1,4 @@
-import { useFetchMore } from "./shared/hooks/useFetchMore";
+import { useFetchMore } from './shared/hooks/useFetchMore';
 
 type Products = {
   category: string;
@@ -13,11 +13,16 @@ type Products = {
   title: string;
 };
 
+const URL = 'https://fakestoreapi.com/products';
+
 function App() {
-  const { data, error, isLoading, fetchMore } = useFetchMore({
-    apiUrl: "https://fakestoreapi.com/products",
-    limit: 4,
-  });
+  const {
+    data,
+    error,
+    isLoading,
+    fetchMore,
+    limitState: limit,
+  } = useFetchMore({ apiUrl: URL, limit: 4 });
 
   return (
     <div>
@@ -27,8 +32,14 @@ function App() {
       {data.map((item: Products) => (
         <p key={item.id}>{item.title}</p>
       ))}
+
       {isLoading && <p>Loading...</p>}
-      <button onClick={fetchMore}>Load more</button>
+
+      <button
+        disabled={isLoading ? true : false || limit >= 20 ? true : false}
+        onClick={fetchMore}>
+        Load more
+      </button>
     </div>
   );
 }
