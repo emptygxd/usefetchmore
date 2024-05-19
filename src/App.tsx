@@ -1,6 +1,6 @@
 import { useFetchMore } from './shared/hooks/useFetchMore';
 
-type Products = {
+type ProductType = {
   category: string;
   description: string;
   id: number;
@@ -29,15 +29,13 @@ function App() {
       <h1>useFetchMore</h1>
       {error && <p>{error}</p>}
 
-      {data.map((item: Products) => (
+      {data.map((item: ProductType) => (
         <p key={item.id}>{item.title}</p>
       ))}
 
       {isLoading && <p>Loading...</p>}
 
-      <button
-        disabled={isLoading ? true : false || limit >= 20 ? true : false}
-        onClick={fetchMore}>
+      <button disabled={isLoading || limit >= 20} onClick={fetchMore}>
         Load more
       </button>
     </div>
